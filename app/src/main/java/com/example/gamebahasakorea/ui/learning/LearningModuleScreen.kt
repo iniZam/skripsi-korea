@@ -1,5 +1,6 @@
 package com.example.gamebahasakorea.ui.learning
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,6 +20,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -26,6 +29,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
@@ -34,6 +39,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -65,7 +71,8 @@ fun LearningModuleScreen(
     onPlayAudio: (String) -> Unit
 ) {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
-    val tabTitles = listOf("Vokal Dasar", "Konsonan Dasar", "Gabungan & Rangkap", "Blok Suku Kata", "Kata & Terjemahan")
+    var searchQuery by remember { mutableStateOf("") }
+    val tabTitles = listOf("Vokal Dasar", "Konsonan Dasar", "Gabungan & Rangkap", "Blok Suku Kata", "Kata & Terjemahan", "Kamus")
 
     Column(
         modifier = Modifier
@@ -102,7 +109,12 @@ fun LearningModuleScreen(
             tabTitles.forEachIndexed { index, title ->
                 Tab(
                     selected = selectedTabIndex == index,
-                    onClick = { selectedTabIndex = index },
+                    onClick = { 
+                        selectedTabIndex = index
+                        if (index != 5) {
+                            searchQuery = "" // Reset pencarian jika pindah tab
+                        }
+                    },
                     text = {
                         Text(
                             text = title,
@@ -114,6 +126,33 @@ fun LearningModuleScreen(
             }
         }
 
+        AnimatedVisibility(visible = selectedTabIndex == 5) {
+            OutlinedTextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                placeholder = { Text("Cari kata (Hangeul, Latin, atau Arti)...") },
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Cari") },
+                trailingIcon = {
+                    if (searchQuery.isNotEmpty()) {
+                        IconButton(onClick = { searchQuery = "" }) {
+                            Icon(Icons.Default.Clear, contentDescription = "Hapus")
+                        }
+                    }
+                },
+                singleLine = true,
+                shape = RoundedCornerShape(12.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFF2563EB),
+                    unfocusedBorderColor = Color(0xFFCBD5E1),
+                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = Color.White
+                )
+            )
+        }
+
         Spacer(modifier = Modifier.height(12.dp))
 
         val currentList = when (selectedTabIndex) {
@@ -121,7 +160,19 @@ fun LearningModuleScreen(
             1 -> getBasicConsonants()
             2 -> getCompoundLetters()
             3 -> getSyllableBlockExamples()
-            else -> getWordTranslationExamples()
+            4 -> getWordTranslationExamples()
+            else -> {
+                val fullDict = getKoreanDictionary()
+                if (searchQuery.isBlank()) {
+                    fullDict
+                } else {
+                    fullDict.filter {
+                        it.hangeul.contains(searchQuery, ignoreCase = true) ||
+                        it.latin.contains(searchQuery, ignoreCase = true) ||
+                        it.description.contains(searchQuery, ignoreCase = true)
+                    }
+                }
+            }
         }
 
         LazyColumn(

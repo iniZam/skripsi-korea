@@ -155,7 +155,7 @@ class GameRepository(
                     audioResName = "word_gamsahamnida"
                 ),
                 QuestionEntity(
-                    koreanText = "안_하세요",
+                    koreanText = "안...하세요",
                     transliteration = "Annyeonghaseyo (Halo)",
                     category = QuestionCategory.MISSING_CHARACTER.name,
                     optionsJson = "[\"녕\", \"명\", \"년\", \"면\"]",
@@ -164,7 +164,7 @@ class GameRepository(
                     audioResName = "word_annyeonghaseyo"
                 ),
                 QuestionEntity(
-                    koreanText = "감_합니다",
+                    koreanText = "감...합니다",
                     transliteration = "Gamsahamnida (Terima Kasih)",
                     category = QuestionCategory.MISSING_CHARACTER.name,
                     optionsJson = "[\"사\", \"자\", \"마\", \"차\"]",
@@ -173,7 +173,7 @@ class GameRepository(
                     audioResName = "word_gamsahamnida"
                 ),
                 QuestionEntity(
-                    koreanText = "한_",
+                    koreanText = "한...",
                     transliteration = "Hanguk (Korea)",
                     category = QuestionCategory.MISSING_CHARACTER.name,
                     optionsJson = "[\"만\", \"국\", \"민\", \"멘\"]",
@@ -182,7 +182,7 @@ class GameRepository(
                     audioResName = ""
                 ),
                 QuestionEntity(
-                    koreanText = "사랑_요",
+                    koreanText = "사랑...요",
                     transliteration = "Saranghaeyo (Aku cinta kamu)",
                     category = QuestionCategory.MISSING_CHARACTER.name,
                     optionsJson = "[\"해\", \"애\", \"내\", \"매\"]",
@@ -191,7 +191,7 @@ class GameRepository(
                     audioResName = ""
                 ),
                 QuestionEntity(
-                    koreanText = "미안합_다",
+                    koreanText = "미안합...다",
                     transliteration = "Mianhamnida (Maaf)",
                     category = QuestionCategory.MISSING_CHARACTER.name,
                     optionsJson = "[\"나\", \"니\", \"네\", \"누\"]",
