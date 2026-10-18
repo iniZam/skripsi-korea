@@ -33,6 +33,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import coil.request.ImageRequest
+import androidx.compose.ui.platform.LocalContext
+import android.os.Build
 import com.example.gamebahasakorea.R
 import com.example.gamebahasakorea.domain.model.QuizResultSummary
 import java.util.Locale
@@ -78,8 +84,21 @@ fun QuizResultScreen(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Image(
-                painter = painterResource(id = if (summary.accuracyPercentage >= 70.0) R.drawable.beruang4 else R.drawable.beruang5),
+            val isGoodResult = summary.accuracyPercentage >= 50.0
+            val context = LocalContext.current
+            val imageRequest = ImageRequest.Builder(context)
+                .data(if (isGoodResult) R.drawable.result_good_anim else R.drawable.result_bad_anim)
+                .decoderFactory(
+                    if (Build.VERSION.SDK_INT >= 28) {
+                        ImageDecoderDecoder.Factory()
+                    } else {
+                        GifDecoder.Factory()
+                    }
+                )
+                .build()
+
+            AsyncImage(
+                model = imageRequest,
                 contentDescription = "Mascot Result",
                 modifier = Modifier
                     .size(90.dp)

@@ -31,6 +31,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import coil.request.ImageRequest
+import androidx.compose.ui.platform.LocalContext
+import android.os.Build
 import com.example.gamebahasakorea.R
 
 @Composable
@@ -57,9 +63,21 @@ fun SplashScreen() {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier.padding(24.dp)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.loading),
-                contentDescription = "Loading Mascot",
+            val context = LocalContext.current
+            val imageRequest = ImageRequest.Builder(context)
+                .data(R.drawable.splash_anim)
+                .decoderFactory(
+                    if (Build.VERSION.SDK_INT >= 28) {
+                        coil.decode.ImageDecoderDecoder.Factory()
+                    } else {
+                        coil.decode.GifDecoder.Factory()
+                    }
+                )
+                .build()
+
+            AsyncImage(
+                model = imageRequest,
+                contentDescription = "Loading Mascot GIF",
                 modifier = Modifier
                     .size(220.dp)
                     .scale(scaleAnim)

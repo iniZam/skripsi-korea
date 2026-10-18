@@ -12,6 +12,8 @@ import com.example.gamebahasakorea.domain.model.Question
 import com.example.gamebahasakorea.domain.model.QuizResultSummary
 import com.example.gamebahasakorea.domain.model.UserPerformanceData
 import com.example.gamebahasakorea.util.AudioPlayerManager
+import com.example.gamebahasakorea.util.BgmManager
+import com.example.gamebahasakorea.R
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,6 +42,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     )
 
     val audioManager = AudioPlayerManager(application)
+    val bgmManager = BgmManager(application)
 
     // State Navigasi Screen
     private val _currentScreen = MutableStateFlow(ScreenState.SPLASH)
@@ -83,7 +86,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             repository.populateInitialQuestionsIfNeeded()
             // Splash delay singkat
             delay(1500)
-            _currentScreen.value = ScreenState.MAIN_MENU
+            navigateTo(ScreenState.MAIN_MENU)
         }
     }
 
@@ -92,6 +95,16 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             loadPerformanceHistory()
         }
         _currentScreen.value = screen
+        
+        // Handle BGM berdasarkan Screen State
+        when (screen) {
+            ScreenState.MAIN_MENU -> bgmManager.playBgm(R.raw.bgm_home)
+            ScreenState.LEARNING_MODULE -> bgmManager.playBgm(R.raw.bgm_learning)
+            ScreenState.QUIZ -> bgmManager.playBgm(R.raw.bgm_quiz)
+            ScreenState.LEVEL_SELECTION, ScreenState.PERFORMANCE_LOGS -> bgmManager.playBgm(R.raw.bgm_home)
+            ScreenState.SPLASH -> bgmManager.stopBgm()
+            else -> {} // Hasil kuis punya BGM tersendiri
+        }
     }
 
     /**
@@ -107,7 +120,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             currentSessionLogs.clear()
             _quizResultSummary.value = null
 
-            _currentScreen.value = ScreenState.QUIZ
+            navigateTo(ScreenState.QUIZ)
             startQuestionTimer()
 
             // Mainkan audio pelafalan soal pertama secara otomatis jika ada
@@ -209,6 +222,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
         _quizResultSummary.value = summary
         _currentTargetDifficulty.value = summary.nextTargetDifficulty
+        
+        // Mainkan BGM Hasil Kuis berdasarkan nilai (Lebih besar atau sama dengan 50 = Bagus)
+        if (summary.accuracyPercentage >= 50.0) {
+            bgmManager.playBgm(R.raw.bgm_result_good, loop = false)
+        } else {
+            bgmManager.playBgm(R.raw.bgm_result_bad, loop = false)
+        }
+        
         _currentScreen.value = ScreenState.QUIZ_RESULT
     }
 
@@ -227,5 +248,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     override fun onCleared() {
         super.onCleared()
         audioManager.release()
+        bgmManager.release()
     }
 }
