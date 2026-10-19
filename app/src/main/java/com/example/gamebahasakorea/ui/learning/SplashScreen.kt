@@ -41,73 +41,49 @@ import com.example.gamebahasakorea.R
 
 @Composable
 fun SplashScreen() {
-    var startAnimation by remember { mutableStateOf(false) }
-    val scaleAnim by animateFloatAsState(
-        targetValue = if (startAnimation) 1.0f else 0.7f,
-        animationSpec = tween(durationMillis = 1000),
-        label = "ScaleAnim"
-    )
-
-    LaunchedEffect(Unit) {
-        startAnimation = true
-    }
-
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFEBF3FA)),
-        contentAlignment = Alignment.Center
+        modifier = Modifier.fillMaxSize()
     ) {
+        // Background Image for Splash
+        Image(
+            painter = painterResource(id = R.drawable.bg_splash),
+            contentDescription = "Background Splash Screen",
+            contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+
+        // Semi-transparent overlay to keep the loading indicator visible
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.5f))
+        )
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-            modifier = Modifier.padding(24.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp)
         ) {
-            val context = LocalContext.current
-            val imageRequest = ImageRequest.Builder(context)
-                .data(R.drawable.splash_anim)
-                .decoderFactory(
-                    if (Build.VERSION.SDK_INT >= 28) {
-                        coil.decode.ImageDecoderDecoder.Factory()
-                    } else {
-                        coil.decode.GifDecoder.Factory()
-                    }
-                )
-                .build()
-
-            AsyncImage(
-                model = imageRequest,
-                contentDescription = "Loading Mascot GIF",
-                modifier = Modifier
-                    .size(220.dp)
-                    .scale(scaleAnim)
-                    .clip(RoundedCornerShape(24.dp))
-            )
-
-            Spacer(modifier = Modifier.height(28.dp))
-
-            Text(
-                text = "Game Edukasi Aksara Korea",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF1E3A8A)
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = "Belajar Hangeul Interaktif & Adaptif",
-                fontSize = 14.sp,
-                color = Color(0xFF475569)
-            )
-
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
             CircularProgressIndicator(
-                color = Color(0xFF2563EB),
-                strokeWidth = 3.dp,
-                modifier = Modifier.size(36.dp)
+                color = Color.White,
+                strokeWidth = 4.dp,
+                modifier = Modifier.size(48.dp)
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            Text(
+                text = "Memuat...",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.White
+            )
+
+            Spacer(modifier = Modifier.height(48.dp))
         }
     }
 }

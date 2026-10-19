@@ -43,14 +43,23 @@ fun MainMenuScreen(
     onNavigateToLogs: () -> Unit
 ) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(Color(0xFFEFF6FF), Color(0xFFDBEAFE))
-                )
-            )
+        modifier = Modifier.fillMaxSize()
     ) {
+        // Background Image
+        Image(
+            painter = painterResource(id = R.drawable.bg_main_menu),
+            contentDescription = "Background Main Menu",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        
+        // Semi-transparent overlay so the text is still readable
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.4f))
+        )
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -60,65 +69,32 @@ fun MainMenuScreen(
         ) {
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Header Banner
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(140.dp),
-                shape = RoundedCornerShape(20.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
-            ) {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    Image(
-                        painter = painterResource(id = R.drawable.menu),
-                        contentDescription = "Header Menu",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(
-                                Brush.horizontalGradient(
-                                    colors = listOf(Color.Black.copy(alpha = 0.5f), Color.Transparent)
-                                )
-                            )
-                    )
-                    Text(
-                        text = "한글 게임\nHangeul EduGame",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        modifier = Modifier
-                            .align(Alignment.CenterStart)
-                            .padding(20.dp)
-                    )
-                }
-            }
+            Spacer(modifier = Modifier.height(40.dp))
 
-            Spacer(modifier = Modifier.height(20.dp))
-
-            // Mascot Image
-            Image(
-                painter = painterResource(id = R.drawable.beruang1),
-                contentDescription = "Mascot Beruang",
-                modifier = Modifier
-                    .size(160.dp)
-                    .clip(RoundedCornerShape(20.dp))
+            // Judul Aplikasi
+            Text(
+                text = "한글 게임\nHangeul EduGame",
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                textAlign = TextAlign.Center,
+                lineHeight = 40.sp,
+                modifier = Modifier.padding(horizontal = 20.dp)
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
+            // Subjudul
             Text(
                 text = "Selamat Datang! Yuk belajar & bermain Aksara Korea bersama!",
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Medium,
-                color = Color(0xFF1E293B),
+                color = Color.White.copy(alpha = 0.9f),
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = 24.dp)
             )
 
-            Spacer(modifier = Modifier.height(28.dp))
+            Spacer(modifier = Modifier.height(48.dp))
 
             // Action Buttons (HCI / UX Principles: Large target size, high contrast)
             MenuActionButton(
