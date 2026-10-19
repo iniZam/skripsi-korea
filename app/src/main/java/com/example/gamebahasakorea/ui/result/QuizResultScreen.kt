@@ -51,14 +51,26 @@ fun QuizResultScreen(
 ) {
     if (summary == null) return
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF8FAFC))
-            .padding(20.dp)
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.bg_main_menu),
+            contentDescription = "Background",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.5f))
+        )
+        
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
         Spacer(modifier = Modifier.height(10.dp))
 
         // Banner Finish Image
@@ -110,12 +122,12 @@ fun QuizResultScreen(
                     text = "Sesi Kuis Selesai!",
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF1E3A8A)
+                    color = Color.White
                 )
                 Text(
                     text = "Berikut ringkasan performa belajarmu",
                     fontSize = 13.sp,
-                    color = Color(0xFF64748B)
+                    color = Color.White.copy(alpha = 0.85f)
                 )
             }
         }
@@ -242,12 +254,13 @@ fun QuizResultScreen(
                 text = "Kembali ke Menu Utama",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF475569)
+                color = Color.White
             )
         }
 
         Spacer(modifier = Modifier.height(20.dp))
     }
+}
 }
 
 @Composable

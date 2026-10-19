@@ -1,6 +1,8 @@
 package com.example.gamebahasakorea.ui.quiz
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,9 +36,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.gamebahasakorea.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,12 +49,23 @@ fun LevelSelectionScreen(
     onBack: () -> Unit,
     onSelectLevel: (Int) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF8FAFC))
-    ) {
-        TopAppBar(
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.bg_main_menu),
+            contentDescription = "Background",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.5f))
+        )
+        
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            TopAppBar(
             title = {
                 Text(
                     text = "Pilih Level Kuis",
@@ -67,7 +83,7 @@ fun LevelSelectionScreen(
                     )
                 }
             },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF059669))
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
         )
 
         Column(
@@ -83,13 +99,13 @@ fun LevelSelectionScreen(
                 text = "Pilih Tingkat Kesulitan",
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF1E293B)
+                color = Color.White
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "Kuis akan menyesuaikan secara adaptif sesuai dengan kemampuanmu di level ini.",
                 fontSize = 14.sp,
-                color = Color(0xFF64748B),
+                color = Color.White.copy(alpha = 0.85f),
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
@@ -147,6 +163,7 @@ fun LevelSelectionScreen(
             Spacer(modifier = Modifier.height(20.dp))
         }
     }
+}
 }
 
 @Composable

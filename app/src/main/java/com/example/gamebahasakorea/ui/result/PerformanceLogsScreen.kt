@@ -1,6 +1,8 @@
 package com.example.gamebahasakorea.ui.result
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,9 +28,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.gamebahasakorea.R
 import com.example.gamebahasakorea.data.local.entity.UserPerformanceEntity
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -42,12 +47,23 @@ fun PerformanceLogsScreen(
 ) {
     val dateFormat = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF8FAFC))
-    ) {
-        TopAppBar(
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.bg_main_menu),
+            contentDescription = "Background",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.5f))
+        )
+        
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            TopAppBar(
             title = {
                 Text(
                     text = "Data Mining: Log Performa User",
@@ -65,7 +81,7 @@ fun PerformanceLogsScreen(
                     )
                 }
             },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFD97706))
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
         )
 
         if (logs.isEmpty()) {
@@ -157,4 +173,5 @@ fun PerformanceLogsScreen(
             }
         }
     }
+}
 }

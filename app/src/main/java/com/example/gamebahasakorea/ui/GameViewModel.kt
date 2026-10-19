@@ -96,14 +96,11 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
         _currentScreen.value = screen
         
-        // Handle BGM berdasarkan Screen State
-        when (screen) {
-            ScreenState.MAIN_MENU -> bgmManager.playBgm(R.raw.bgm_home)
-            ScreenState.LEARNING_MODULE -> bgmManager.playBgm(R.raw.bgm_learning)
-            ScreenState.QUIZ -> bgmManager.playBgm(R.raw.bgm_quiz)
-            ScreenState.LEVEL_SELECTION, ScreenState.PERFORMANCE_LOGS -> bgmManager.playBgm(R.raw.bgm_home)
-            ScreenState.SPLASH -> bgmManager.stopBgm()
-            else -> {} // Hasil kuis punya BGM tersendiri
+        // Memutar BGM yang sama (bgm_home) di seluruh layar (kecuali hasil kuis yang spesifik atau Splash)
+        if (screen != ScreenState.SPLASH && screen != ScreenState.QUIZ_RESULT) {
+            bgmManager.playBgm(R.raw.bgm_home)
+        } else if (screen == ScreenState.SPLASH) {
+            bgmManager.stopBgm()
         }
     }
 

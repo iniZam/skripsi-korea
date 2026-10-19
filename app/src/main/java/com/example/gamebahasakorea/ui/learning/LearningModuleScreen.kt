@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -74,12 +75,23 @@ fun LearningModuleScreen(
     var searchQuery by remember { mutableStateOf("") }
     val tabTitles = listOf("Vokal Dasar", "Konsonan Dasar", "Gabungan & Rangkap", "Blok Suku Kata", "Kata & Terjemahan", "Kamus")
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF8FAFC))
-    ) {
-        TopAppBar(
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.bg_main_menu),
+            contentDescription = "Background",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.5f))
+        )
+        
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            TopAppBar(
             title = {
                 Text(
                     text = "Modul Pembelajaran Hangeul",
@@ -97,13 +109,13 @@ fun LearningModuleScreen(
                     )
                 }
             },
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF2563EB))
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
         )
 
         ScrollableTabRow(
             selectedTabIndex = selectedTabIndex,
-            containerColor = Color(0xFFEFF6FF),
-            contentColor = Color(0xFF2563EB),
+            containerColor = Color.Transparent,
+            contentColor = Color.White,
             edgePadding = 16.dp
         ) {
             tabTitles.forEachIndexed { index, title ->
@@ -189,6 +201,7 @@ fun LearningModuleScreen(
             }
         }
     }
+}
 }
 
 @Composable
