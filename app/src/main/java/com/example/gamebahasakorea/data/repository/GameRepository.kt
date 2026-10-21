@@ -87,6 +87,33 @@ class GameRepository(
                     audioResName = "vowel_eo"
                 ),
                 QuestionEntity(
+                    koreanText = "ㅗ",
+                    transliteration = "o",
+                    category = QuestionCategory.VOWEL_BASIC.name,
+                    optionsJson = "[\"a\", \"i\", \"o\", \"u\"]",
+                    correctOptionIndex = 2,
+                    difficultyScore = 0.25,
+                    audioResName = "vowel_o"
+                ),
+                QuestionEntity(
+                    koreanText = "ㅜ",
+                    transliteration = "u",
+                    category = QuestionCategory.VOWEL_BASIC.name,
+                    optionsJson = "[\"eu\", \"eo\", \"i\", \"u\"]",
+                    correctOptionIndex = 3,
+                    difficultyScore = 0.25,
+                    audioResName = "vowel_u"
+                ),
+                QuestionEntity(
+                    koreanText = "ㅣ",
+                    transliteration = "i",
+                    category = QuestionCategory.VOWEL_BASIC.name,
+                    optionsJson = "[\"i\", \"a\", \"eo\", \"o\"]",
+                    correctOptionIndex = 0,
+                    difficultyScore = 0.10,
+                    audioResName = "vowel_i"
+                ),
+                QuestionEntity(
                     koreanText = "ㄱ",
                     transliteration = "g/k",
                     category = QuestionCategory.CONSONANT_BASIC.name,
@@ -105,6 +132,24 @@ class GameRepository(
                     audioResName = "vowel_ae"
                 ),
                 QuestionEntity(
+                    koreanText = "ㅔ",
+                    transliteration = "e",
+                    category = QuestionCategory.VOWEL_COMPOUND.name,
+                    optionsJson = "[\"ae\", \"e\", \"wa\", \"wi\"]",
+                    correctOptionIndex = 1,
+                    difficultyScore = 0.50,
+                    audioResName = "vowel_e"
+                ),
+                QuestionEntity(
+                    koreanText = "ㅘ",
+                    transliteration = "wa",
+                    category = QuestionCategory.VOWEL_COMPOUND.name,
+                    optionsJson = "[\"wo\", \"we\", \"wa\", \"ui\"]",
+                    correctOptionIndex = 2,
+                    difficultyScore = 0.60,
+                    audioResName = "vowel_wa"
+                ),
+                QuestionEntity(
                     koreanText = "ㄲ",
                     transliteration = "kk",
                     category = QuestionCategory.CONSONANT_DOUBLE.name,
@@ -112,6 +157,15 @@ class GameRepository(
                     correctOptionIndex = 1,
                     difficultyScore = 0.55,
                     audioResName = "consonant_kk"
+                ),
+                QuestionEntity(
+                    koreanText = "ㄸ",
+                    transliteration = "tt",
+                    category = QuestionCategory.CONSONANT_DOUBLE.name,
+                    optionsJson = "[\"pp\", \"jj\", \"ss\", \"tt\"]",
+                    correctOptionIndex = 3,
+                    difficultyScore = 0.65,
+                    audioResName = "consonant_tt"
                 ),
                 QuestionEntity(
                     koreanText = "가",
@@ -153,6 +207,15 @@ class GameRepository(
                     correctOptionIndex = 2,
                     difficultyScore = 0.98,
                     audioResName = "word_gamsahamnida"
+                ),
+                QuestionEntity(
+                    koreanText = "물",
+                    transliteration = "Mul (Air)",
+                    category = QuestionCategory.WORD_TRANSLATION.name,
+                    optionsJson = "[\"Air\", \"Api\", \"Tanah\", \"Udara\"]",
+                    correctOptionIndex = 0,
+                    difficultyScore = 0.85,
+                    audioResName = "word_mul"
                 ),
                 QuestionEntity(
                     koreanText = "안...하세요",
