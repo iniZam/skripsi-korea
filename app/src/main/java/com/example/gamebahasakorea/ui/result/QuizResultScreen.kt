@@ -33,12 +33,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-import coil.decode.GifDecoder
-import coil.decode.ImageDecoderDecoder
-import coil.request.ImageRequest
-import androidx.compose.ui.platform.LocalContext
-import android.os.Build
 import com.example.gamebahasakorea.R
 import com.example.gamebahasakorea.domain.model.QuizResultSummary
 import java.util.Locale
@@ -92,44 +86,31 @@ fun QuizResultScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         // Mascot & Title
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
         ) {
             val isGoodResult = summary.accuracyPercentage >= 50.0
-            val context = LocalContext.current
-            val imageRequest = ImageRequest.Builder(context)
-                .data(if (isGoodResult) R.drawable.result_good_anim else R.drawable.result_bad_anim)
-                .decoderFactory(
-                    if (Build.VERSION.SDK_INT >= 28) {
-                        ImageDecoderDecoder.Factory()
-                    } else {
-                        GifDecoder.Factory()
-                    }
-                )
-                .build()
 
-            AsyncImage(
-                model = imageRequest,
+            Image(
+                painter = painterResource(id = if (isGoodResult) R.drawable.result_good_anim else R.drawable.result_bad_anim),
                 contentDescription = "Mascot Result",
                 modifier = Modifier
-                    .size(90.dp)
+                    .size(180.dp)
                     .clip(RoundedCornerShape(16.dp))
             )
-            Spacer(modifier = Modifier.width(16.dp))
-            Column {
-                Text(
-                    text = "Sesi Kuis Selesai!",
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
-                Text(
-                    text = "Berikut ringkasan performa belajarmu",
-                    fontSize = 13.sp,
-                    color = Color.White.copy(alpha = 0.85f)
-                )
-            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Sesi Kuis Selesai!",
+                fontSize = 26.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            Text(
+                text = "Berikut ringkasan performa belajarmu",
+                fontSize = 15.sp,
+                color = Color.White.copy(alpha = 0.85f)
+            )
         }
 
         Spacer(modifier = Modifier.height(20.dp))

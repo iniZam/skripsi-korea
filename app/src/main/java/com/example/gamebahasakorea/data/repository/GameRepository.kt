@@ -123,6 +123,42 @@ class GameRepository(
                     audioResName = "consonant_g"
                 ),
                 QuestionEntity(
+                    koreanText = "ㄴ",
+                    transliteration = "n",
+                    category = QuestionCategory.CONSONANT_BASIC.name,
+                    optionsJson = "[\"m\", \"n\", \"s\", \"j\"]",
+                    correctOptionIndex = 1,
+                    difficultyScore = 0.15,
+                    audioResName = "consonant_n"
+                ),
+                QuestionEntity(
+                    koreanText = "ㄷ",
+                    transliteration = "d/t",
+                    category = QuestionCategory.CONSONANT_BASIC.name,
+                    optionsJson = "[\"r\", \"n\", \"d/t\", \"g\"]",
+                    correctOptionIndex = 2,
+                    difficultyScore = 0.20,
+                    audioResName = "consonant_d"
+                ),
+                QuestionEntity(
+                    koreanText = "ㄹ",
+                    transliteration = "r/l",
+                    category = QuestionCategory.CONSONANT_BASIC.name,
+                    optionsJson = "[\"m\", \"p\", \"h\", \"r/l\"]",
+                    correctOptionIndex = 3,
+                    difficultyScore = 0.25,
+                    audioResName = "consonant_r"
+                ),
+                QuestionEntity(
+                    koreanText = "ㅁ",
+                    transliteration = "m",
+                    category = QuestionCategory.CONSONANT_BASIC.name,
+                    optionsJson = "[\"m\", \"n\", \"b\", \"s\"]",
+                    correctOptionIndex = 0,
+                    difficultyScore = 0.10,
+                    audioResName = "consonant_m"
+                ),
+                QuestionEntity(
                     koreanText = "ㅐ",
                     transliteration = "ae",
                     category = QuestionCategory.VOWEL_COMPOUND.name,
