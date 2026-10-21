@@ -33,6 +33,7 @@ class GameRepository(
                 3 -> entity.category == QuestionCategory.VOWEL_COMPOUND.name || entity.category == QuestionCategory.CONSONANT_DOUBLE.name
                 4 -> entity.category == QuestionCategory.SYLLABLE_BLOCK.name || entity.category == QuestionCategory.WORD_TRANSLATION.name
                 5 -> entity.category == QuestionCategory.MISSING_CHARACTER.name
+                6 -> entity.category == QuestionCategory.MISSING_DOUBLE_CHARACTER.name
                 else -> true
             }
         }
@@ -296,6 +297,52 @@ class GameRepository(
                     optionsJson = "[\"나\", \"니\", \"네\", \"누\"]",
                     correctOptionIndex = 1,
                     difficultyScore = 0.95,
+                    audioResName = ""
+                ),
+                // --- SOAL LEVEL 6 ---
+                QuestionEntity(
+                    koreanText = "안...하...요",
+                    transliteration = "",
+                    category = QuestionCategory.MISSING_DOUBLE_CHARACTER.name,
+                    optionsJson = "[\"녕 - 세\", \"명 - 셔\", \"년 - 제\", \"면 - 체\"]",
+                    correctOptionIndex = 0,
+                    difficultyScore = 0.96,
+                    audioResName = ""
+                ),
+                QuestionEntity(
+                    koreanText = "감...합니...",
+                    transliteration = "",
+                    category = QuestionCategory.MISSING_DOUBLE_CHARACTER.name,
+                    optionsJson = "[\"자 - 까\", \"사 - 다\", \"마 - 라\", \"차 - 바\"]",
+                    correctOptionIndex = 1,
+                    difficultyScore = 0.97,
+                    audioResName = ""
+                ),
+                QuestionEntity(
+                    koreanText = "사...해...",
+                    transliteration = "",
+                    category = QuestionCategory.MISSING_DOUBLE_CHARACTER.name,
+                    optionsJson = "[\"람 - 고\", \"랑 - 요\", \"만 - 도\", \"단 - 조\"]",
+                    correctOptionIndex = 1,
+                    difficultyScore = 0.96,
+                    audioResName = ""
+                ),
+                QuestionEntity(
+                    koreanText = "미...합니...",
+                    transliteration = "",
+                    category = QuestionCategory.MISSING_DOUBLE_CHARACTER.name,
+                    optionsJson = "[\"안 - 다\", \"만 - 까\", \"인 - 라\", \"연 - 나\"]",
+                    correctOptionIndex = 0,
+                    difficultyScore = 0.98,
+                    audioResName = ""
+                ),
+                QuestionEntity(
+                    koreanText = "반...습니...",
+                    transliteration = "",
+                    category = QuestionCategory.MISSING_DOUBLE_CHARACTER.name,
+                    optionsJson = "[\"간 - 까\", \"만 - 라\", \"갑 - 다\", \"잡 - 나\"]",
+                    correctOptionIndex = 2,
+                    difficultyScore = 0.99,
                     audioResName = ""
                 )
             )

@@ -19,6 +19,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Looks3
 import androidx.compose.material.icons.filled.Looks4
 import androidx.compose.material.icons.filled.Looks5
+import androidx.compose.material.icons.filled.Looks6
 import androidx.compose.material.icons.filled.LooksOne
 import androidx.compose.material.icons.filled.LooksTwo
 import androidx.compose.foundation.rememberScrollState
@@ -158,6 +159,16 @@ fun LevelSelectionScreen(
                 icon = Icons.Default.Looks5,
                 backgroundColor = Color(0xFFEC4899),
                 onClick = { onSelectLevel(5) }
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            LevelButton(
+                title = "Level 6: Ujian Sulit",
+                subtitle = "Lengkapi 2 aksara tanpa petunjuk",
+                icon = Icons.Default.Looks6,
+                backgroundColor = Color(0xFF9333EA), // Ungu tua
+                onClick = { onSelectLevel(6) }
             )
             
             Spacer(modifier = Modifier.height(20.dp))

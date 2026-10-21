@@ -184,10 +184,10 @@ fun QuizScreen(
 
                     Spacer(modifier = Modifier.height(4.dp))
 
-                    val instructionText = if (currentQuestion.category == QuestionCategory.MISSING_CHARACTER) {
-                        "Lengkapi aksara yang hilang pada kata di atas!"
-                    } else {
-                        "Manakah transliterasi/bacaan yang benar?"
+                    val instructionText = when (currentQuestion.category) {
+                        QuestionCategory.MISSING_CHARACTER -> "Lengkapi aksara yang hilang pada kata di atas!"
+                        QuestionCategory.MISSING_DOUBLE_CHARACTER -> "Lengkapi 2 aksara yang hilang tanpa petunjuk!"
+                        else -> "Manakah transliterasi/bacaan yang benar?"
                     }
 
                     Text(
@@ -197,6 +197,7 @@ fun QuizScreen(
                         textAlign = TextAlign.Center
                     )
 
+                    // Hanya tampilkan petunjuk di Level 5 (MISSING_CHARACTER)
                     if (currentQuestion.category == QuestionCategory.MISSING_CHARACTER) {
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(

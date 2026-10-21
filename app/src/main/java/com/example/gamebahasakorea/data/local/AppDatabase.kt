@@ -14,7 +14,7 @@ import com.example.gamebahasakorea.data.local.entity.UserPerformanceEntity
  */
 @Database(
     entities = [QuestionEntity::class, UserPerformanceEntity::class],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

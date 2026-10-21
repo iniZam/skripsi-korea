@@ -10,5 +10,6 @@ enum class QuestionCategory {
     CONSONANT_DOUBLE,  // Huruf Konsonan Rangkap (ㄲ, ㄸ, ㅃ, ㅆ, ㅉ)
     SYLLABLE_BLOCK,    // Pembentukan Blok Suku Kata (Choseong, Jungseong, Jongseong)
     WORD_TRANSLATION,  // Penerjemah Kata Sederhana Korea-Indo
-    MISSING_CHARACTER  // Melengkapi Aksara/Kata (Level 5)
+    MISSING_CHARACTER, // Melengkapi Aksara/Kata (Level 5)
+    MISSING_DOUBLE_CHARACTER // Melengkapi Dua Aksara Tanpa Petunjuk (Level 6)
 }
